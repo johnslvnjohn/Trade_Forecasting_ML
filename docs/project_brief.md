@@ -64,7 +64,7 @@ The project follows a structured machine-learning lifecycle:
 * Scikit-learn
 * Matplotlib
 * Machine-learning regression models
-* GitHub for version control and evidence of project progression
+* GitHub for version control and tracking of project progression
 
 ### Initial Model Scope
 
