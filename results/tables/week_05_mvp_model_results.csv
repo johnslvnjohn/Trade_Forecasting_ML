@@ -1,0 +1,4 @@
+model,MAE_USD_bn,RMSE_USD_bn,R2,MAPE_percent,model_status
+Linear Regression,10.25,19.56,0.922,13.73,Baseline
+Random Forest,5.02,8.94,0.984,8.28,Selected MVP benchmark
+Support Vector Regression,13.32,18.05,0.934,33.72,Baseline
