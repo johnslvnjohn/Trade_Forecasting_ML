@@ -1,101 +1,100 @@
-# Trade_Forecasting_ML
-Tracking my Trade forecasting using Machine Learning Project
 # Forecasting International Trade Activity Using Machine Learning
 
 ## Project Overview
 
-In this project, I am investigating whether oil prices, commodity indicators and macroeconomic variables can be used to forecast monthly international trade activity across selected G20 economies.
+This project investigates whether commodity prices, oil-price indicators and macroeconomic variables can be used to forecast monthly international trade activity across selected G20 economies.
 
-The project focuses on predicting monthly import and export values using historical trade data from UN Comtrade combined with external economic indicators.
-
-The project is being developed as part of the Higher Diploma in Science in Computing programme, with a focus on Artificial Intelligence and Machine Learning.
+The analysis predicts monthly import and export trade values using historical trade data from UN Comtrade combined with external economic indicators. The project is being developed as part of the Higher Diploma in Science in Computing programme, with a focus on Artificial Intelligence and Machine Learning.
 
 ## Project Aim
 
-The aim of the project is to develop and evaluate machine-learning models that can forecast monthly import and export trade values for selected G20 economies.
+The aim is to develop and evaluate machine-learning models that forecast monthly import and export trade values for selected G20 economies.
 
-The project will assess whether oil prices and other external economic indicators can improve trade forecasting accuracy and provide useful business insights.
+A key part of the analysis is assessing whether external commodity and macroeconomic indicators, combined with historical trade seasonality, improve forecasting accuracy.
 
 ## Current Status
 
-The project is currently at the MVP development stage.
+The project is currently in the post-MVP model refinement stage.
 
-Work completed so far includes:
+Completed work includes:
 
-* Collection of monthly import and export trade data for 18 selected G20 economies.
-* Integration of commodity-price and macroeconomic variables.
-* Data cleaning, transformation and feature engineering.
-* Time-based model training and testing.
-* Initial comparison of Linear Regression, Random Forest and Support Vector Regression models.
-* Initial model visualisations and performance analysis.
+- Collection of monthly import and export trade data for 18 selected G20 economies.
+- Integration of commodity-price and macroeconomic variables.
+- Data cleaning, transformation and feature engineering.
+- Time-based model training using 2014–2023 data.
+- Out-of-sample testing using 2024 monthly trade observations.
+- Initial comparison of Linear Regression, Random Forest and Support Vector Regression models.
+- Development and validation of a true 12-month seasonal trade-lag feature.
+- Controlled comparison of external-only and seasonal Random Forest models.
+- Country-level performance analysis and visualisations.
 
-The MVP submission is planned for Week 6.
+## Current Best Validated Model
 
-## Current Best MVP Model
+The current strongest validated model is a Random Forest model that includes a true 12-month seasonal lag feature.
 
-The current strongest model is Random Forest Regression.
+The seasonal lag represents trade activity in the same month of the previous year. It was constructed using date matching rather than a simple row shift, ensuring that missing monthly observations do not create incorrectly aligned lags.
 
-| Metric |           Result |
-| ------ | ---------------: |
-| MAE    | USD 5.02 billion |
-| RMSE   | USD 8.94 billion |
-| R²     |            0.984 |
-| MAPE   |            8.28% |
+| Model | MAE (USD bn) | RMSE (USD bn) | R² | MAPE |
+|---|---:|---:|---:|---:|
+| Matched external-only Random Forest | 4.95 | 8.79 | 0.984 | 8.21% |
+| Random Forest with true 12-month seasonal lag | **3.94** | **6.95** | **0.990** | **6.66%** |
 
-These results are based on a time-based test period covering monthly trade observations from 2024.
+Both models used the same training records, 2024 test period and Random Forest settings. The only difference was the inclusion of the 12-month seasonal lag.
+
+## Key Findings
+
+Adding the true 12-month seasonal lag improved overall forecasting accuracy:
+
+- MAE reduced by approximately USD 1.01 billion.
+- MAPE reduced from 8.21% to 6.66%.
+- R² increased from 0.984 to 0.990.
+- Country-level MAPE improved in 14 of the 18 economies examined.
+
+The largest improvements were observed in:
+
+- Mexico
+- Saudi Arabia
+- Canada
+- Indonesia
+- Italy
+
+The seasonal feature reduced accuracy for Argentina, Germany, the United Kingdom and the Republic of Korea. This indicates that annual trade persistence is valuable for many economies, but not uniformly useful across all countries.
 
 ## Data Sources
 
 The project uses publicly available data sources, including:
 
-* UN Comtrade monthly trade data.
-* World Bank commodity-price indicators.
-* FRED macroeconomic indicators.
-* Other relevant public economic datasets where suitable.
+- UN Comtrade monthly trade data.
+- World Bank commodity-price indicators.
+- FRED macroeconomic indicators.
+- Other relevant public economic datasets where suitable.
 
 ## Models Tested
 
-The following models have been tested during the MVP stage:
+The following models have been tested during the project:
 
-* Linear Regression
-* Random Forest Regression
-* Support Vector Regression
+- Linear Regression
+- Random Forest Regression
+- Support Vector Regression
 
-Further model development after the MVP will consider advanced approaches such as Histogram-Based Gradient Boosting and XGBoost.
+Further final-stage evaluation will consider advanced approaches such as Histogram-Based Gradient Boosting and XGBoost.
 
 ## Evaluation Metrics
 
-The models are evaluated using:
+Models are evaluated using:
 
-* Mean Absolute Error (MAE)
-* Root Mean Squared Error (RMSE)
-* R² Score
-* Mean Absolute Percentage Error (MAPE)
+- Mean Absolute Error (MAE)
+- Root Mean Squared Error (RMSE)
+- R² Score
+- Mean Absolute Percentage Error (MAPE)
 
-MAPE is particularly useful in this project because trade values vary substantially between countries and between import and export flows.
+MAPE is particularly useful because trade values differ substantially across countries and between import and export flows.
 
 ## Repository Structure
 
 ```text
-docs/              Project brief, progress log and data dictionary
-notebooks/         Jupyter notebooks used for data preparation and modelling
-weekly_update/     Weekly evidence of project development
-results/           Visualisations, model outputs and summary tables
-data/sample/       Sample datasets used for demonstration
-```
-
-## Project Documentation
-
-* [Project Brief](docs/project_brief.md)
-* [Weekly Progress Log](docs/weekly_progress_log.md)
-* [Data Dictionary](docs/data_dictionary.md)
-
-## Key Limitation
-
-This project uses monthly trade data, which may be published with a delay depending on the reporting country. The model is therefore designed as a monthly forecasting framework rather than a real-time trade forecasting system.
-
-## Author
-
-John Selvin Raja John
-Student Number: 25120051
-Module / Cohort: HDAIML_SEP25OL
+docs/               Project brief, requirements, progress documentation and data dictionary
+notebooks/          Jupyter notebooks for data preparation, modelling and evaluation
+results/            Visualisations, model outputs and summary tables
+data/sample/        Sample datasets used for demonstration
+weekly_updates/     Weekly evidence of project development
