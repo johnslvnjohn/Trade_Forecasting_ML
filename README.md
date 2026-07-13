@@ -1,100 +1,56 @@
-# Forecasting International Trade Activity Using Machine Learning
-
-## Project Overview
-
-This project investigates whether commodity prices, oil-price indicators and macroeconomic variables can be used to forecast monthly international trade activity across selected G20 economies.
-
-The analysis predicts monthly import and export trade values using historical trade data from UN Comtrade combined with external economic indicators. The project is being developed as part of the Higher Diploma in Science in Computing programme, with a focus on Artificial Intelligence and Machine Learning.
-
-## Project Aim
-
-The aim is to develop and evaluate machine-learning models that forecast monthly import and export trade values for selected G20 economies.
-
-A key part of the analysis is assessing whether external commodity and macroeconomic indicators, combined with historical trade seasonality, improve forecasting accuracy.
-
 ## Current Status
 
-The project is currently in the post-MVP model refinement stage.
+The project has progressed beyond the initial MVP stage and is now in the
+advanced evaluation and explainability phase.
 
-Completed work includes:
+Work completed by Week 8 includes:
 
-- Collection of monthly import and export trade data for 18 selected G20 economies.
-- Integration of commodity-price and macroeconomic variables.
-- Data cleaning, transformation and feature engineering.
-- Time-based model training using 2014–2023 data.
-- Out-of-sample testing using 2024 monthly trade observations.
-- Initial comparison of Linear Regression, Random Forest and Support Vector Regression models.
-- Development and validation of a true 12-month seasonal trade-lag feature.
-- Controlled comparison of external-only and seasonal Random Forest models.
-- Country-level performance analysis and visualisations.
+- Collection and integration of monthly import and export data for 18 G20 economies.
+- Integration of oil prices, commodity indices and macroeconomic indicators.
+- Data cleaning, transformation and time-based feature engineering.
+- Construction of seasonal trade features, including a 12-month trade lag.
+- Training and evaluation of Linear Regression, Support Vector Regression,
+  Random Forest, Histogram-Based Gradient Boosting, XGBoost and LSTM models.
+- Comparison of history-only and history-plus-external-variable models.
+- Country-level forecast error analysis.
+- SHAP explainability analysis.
+- Random Forest model-based prediction intervals.
+- Feature ablation and economic scenario analysis.
+- Repeatability testing of the final model.
 
-## Current Best Validated Model
 
-The current strongest validated model is a Random Forest model that includes a true 12-month seasonal lag feature.
+## Current Best Model
 
-The seasonal lag represents trade activity in the same month of the previous year. It was constructed using date matching rather than a simple row shift, ensuring that missing monthly observations do not create incorrectly aligned lags.
+The strongest model is the Seasonal Random Forest, using annual trade history,
+monthly seasonality and lagged external indicators.
 
-| Model | MAE (USD bn) | RMSE (USD bn) | R² | MAPE |
-|---|---:|---:|---:|---:|
-| Matched external-only Random Forest | 4.95 | 8.79 | 0.984 | 8.21% |
-| Random Forest with true 12-month seasonal lag | **3.94** | **6.95** | **0.990** | **6.66%** |
+| Metric | Result |
+|---|---:|
+| MAE | USD 3.94 billion |
+| RMSE | USD 6.95 billion |
+| R² | 0.9902 |
+| MAPE | 6.66% |
 
-Both models used the same training records, 2024 test period and Random Forest settings. The only difference was the inclusion of the 12-month seasonal lag.
+The model was trained using data before 2024 and evaluated on the held-out
+January–December 2024 test period.
 
-## Key Findings
+## Main Findings
 
-Adding the true 12-month seasonal lag improved overall forecasting accuracy:
+- The 12-month historical trade lag was the strongest overall predictor.
+- Base-metal prices were the strongest external predictor.
+- The US dollar index and Federal Funds Rate added smaller predictive contributions.
+- Crude-oil prices had limited marginal value in the pooled G20 model.
+- External indicators reduced mean MAPE from approximately 7.01% to 6.66%.
+- Random Forest tree-based prediction intervals achieved 94.44% overall
+  empirical coverage.
+- The LSTM underperformed the tree-based models, with a MAPE of 27.34%.
 
-- MAE reduced by approximately USD 1.01 billion.
-- MAPE reduced from 8.21% to 6.66%.
-- R² increased from 0.984 to 0.990.
-- Country-level MAPE improved in 14 of the 18 economies examined.
-
-The largest improvements were observed in:
-
-- Mexico
-- Saudi Arabia
-- Canada
-- Indonesia
-- Italy
-
-The seasonal feature reduced accuracy for Argentina, Germany, the United Kingdom and the Republic of Korea. This indicates that annual trade persistence is valuable for many economies, but not uniformly useful across all countries.
-
-## Data Sources
-
-The project uses publicly available data sources, including:
-
-- UN Comtrade monthly trade data.
-- World Bank commodity-price indicators.
-- FRED macroeconomic indicators.
-- Other relevant public economic datasets where suitable.
-
-## Models Tested
-
-The following models have been tested during the project:
+## Models Evaluated
 
 - Linear Regression
-- Random Forest Regression
 - Support Vector Regression
-
-Further final-stage evaluation will consider advanced approaches such as Histogram-Based Gradient Boosting and XGBoost.
-
-## Evaluation Metrics
-
-Models are evaluated using:
-
-- Mean Absolute Error (MAE)
-- Root Mean Squared Error (RMSE)
-- R² Score
-- Mean Absolute Percentage Error (MAPE)
-
-MAPE is particularly useful because trade values differ substantially across countries and between import and export flows.
-
-## Repository Structure
-
-```text
-docs/               Project brief, requirements, progress documentation and data dictionary
-notebooks/          Jupyter notebooks for data preparation, modelling and evaluation
-results/            Visualisations, model outputs and summary tables
-data/sample/        Sample datasets used for demonstration
-weekly_updates/     Weekly evidence of project development
+- Random Forest Regression
+- Seasonal Random Forest Regression
+- Histogram-Based Gradient Boosting
+- XGBoost
+- Long Short-Term Memory neural network
