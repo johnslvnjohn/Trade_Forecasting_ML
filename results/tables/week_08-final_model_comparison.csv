@@ -1,0 +1,8 @@
+Model,MAE (USD bn),RMSE (USD bn),R2,MAPE (%)
+Linear Regression,10.231,19.727,0.921,13.619
+Random Forest,5.021,8.942,0.984,8.277
+Seasonal Random Forest,3.94,6.95,0.99,6.66
+SVR,13.317,18.045,0.934,33.717
+XGBoost,4.165,7.42,0.989,7.057
+HistGradientBoosting,4.084,7.0,0.99,7.219
+LSTM,19.852,42.689,0.63,27.343
